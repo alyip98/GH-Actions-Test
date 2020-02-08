@@ -1,0 +1,11 @@
+{
+  "enableSearch": true,
+  "pages": [
+    {
+      "headings": {},
+      "src": "index.md",
+      "title": "Landing Page",
+      "layout": "default"
+    }
+  ]
+}
