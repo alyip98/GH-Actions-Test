@@ -61,6 +61,9 @@ try {
   const pattern = /!build \[\S*]\((\S*)\) (\S*)/;
   const matches = commentBody.match(pattern);
 
+  console.log(commentBody);
+  console.log(matches);
+
   const path = matches[1];
   const version = matches[2] || '';
 
