@@ -33,7 +33,7 @@ jobs:
         id: getvars
         uses: ./util/actions/extract-comment
         with:
-          event: ${{ github.event }}
+          event: ${{ toJSON(github.event) }}
 
       - name: Print extracted variables
         run: echo ${{ steps.getvars.outputs }}
