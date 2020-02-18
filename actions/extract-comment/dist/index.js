@@ -58,7 +58,7 @@ const core = __webpack_require__(881);
 try {
   const event = JSON.parse(core.getInput('event', {required: true}));
   const commentBody = event['comment']['body'];
-  const pattern = /!build \[\S*]\((\S*)\) (\S*)/;
+  const pattern = /!build *\[\S*]\((\S*)\) *(\S*)?/;
   const matches = commentBody.match(pattern);
 
   console.log(commentBody);
