@@ -79,7 +79,7 @@ jobs:
           path: site/_site
 
       - name: Clone GH-Pages Repo with Access Token
-        run: git clone https://${{ github.token }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+        run: git clone https://${{ secrets.PAGES_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
 
       - name: Copy built files
         run: cp -r site/_site gh-pages/${{ github.sha }}
