@@ -78,14 +78,21 @@ jobs:
           name: output
           path: site/_site
 
-      - name: Clone GH-Pages Repo with Access Token
-        run: git clone https://${{ secrets.PAGES_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: [Built site](${{ env.PAGES_URL }}/${{ github.sha }})
 
-      - name: Copy built files
-        run: cp -r site/_site gh-pages/${{ github.sha }}
-
-      - name: Create commit
-        run: cd gh-pages && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}\n ${{ env.PAGES_URL }}/${{ github.sha }}"
-
-      - name: Push to GH-Pages
-        run: cd gh-pages && git push
+#      - name: Clone GH-Pages Repo with Access Token
+#        run: git clone https://${{ secrets.PAGES_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+#
+#      - name: Copy built files
+#        run: cp -r site/_site gh-pages/${{ github.sha }}
+#
+#      - name: Create commit
+#        run: cd gh-pages && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}\n ${{ env.PAGES_URL }}/${{ github.sha }}"
+#
+#      - name: Push to GH-Pages
+#        run: cd gh-pages && git push
