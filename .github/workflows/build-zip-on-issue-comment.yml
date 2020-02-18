@@ -9,11 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Print github event variable
         env:
           GITHUB_EVENT: ${{ github.event }}
           GITHUB_EVENT_JSON: ${{ toJSON(github.event) }}
-        run: echo $GITHUB_EVENT \n $GITHUB_EVENT_JSON
+        run: echo "$GITHUB_EVENT" \n "$GITHUB_EVENT_JSON"
 
       - name: Checkout selected Markbind version
         uses: actions/checkout@v2
