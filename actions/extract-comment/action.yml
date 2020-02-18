@@ -1,7 +1,7 @@
 name: 'Unzip file'
 description: 'Unzips a .zip file'
 inputs:
-  events:
+  event:
     description: 'event object'
     required: true
 outputs:
