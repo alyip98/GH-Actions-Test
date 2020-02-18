@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: MarkBind/markbind
-          ref: ''
+          ref: ${{ steps.getvars.outputs.version }}
           path: markbind
 
       - run: cd markbind && npm ci
@@ -53,7 +53,7 @@ jobs:
       - name: Unzip file
         uses: alyip98/unzip@v0.1-alpha
         with:
-          file: ${{ steps.getvars.outputs.path }}
+          file: ./site.zip
           path: ./site
 
       - name: Set BaseURL
