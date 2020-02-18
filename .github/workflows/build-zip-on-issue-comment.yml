@@ -4,6 +4,9 @@ on:
   issue_comment:
     types: [created]
 
+env:
+  PAGES_URL: https://alyip98.github.io/GH-Actions-Test
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -57,10 +60,10 @@ jobs:
           path: ./site
 
       - name: Set BaseURL
-        uses: ./markbind/.github/actions/setBaseUrl
+        uses: alyip98/set-json@v0.1-alpha
         id: setBaseUrl
         with:
-          file: markbind/docs/site.json
+          file: site/site.json
           key: baseUrl
           value: ${{ env.PAGES_URL }}/${{ github.sha }}
 
@@ -74,13 +77,13 @@ jobs:
           path: site/_site
 
 #      - name: Clone GH-Pages Repo with Access Token
-#        run: git clone https://${{ secrets.GH_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+#        run: git clone https://${{ github.token }}@github.com/alyip98/GH-Actions-Test.git gh-pages
 #
 #      - name: Copy built files
-#        run: cp -r markbind/docs/_site gh-pages/${{ github.sha }}
+#        run: cp -r site/_site gh-pages/${{ github.sha }}
 #
 #      - name: Create commit
-#        run: cd gh-pages && ls && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}"
+#        run: cd gh-pages && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}"
 #
 #      - name: Push to GH-Pages
 #        run: cd gh-pages && git push
