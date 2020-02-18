@@ -1,0 +1,63 @@
+name: Github Pages Preview
+
+on: [push] # Temporarily disable
+# hello helklo asdasd222 asdasd asd
+
+env:
+  PAGES_URL: https://alyip98.github.io/GH-Actions-Test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checkout Markbind
+        uses: actions/checkout@v2
+        with:
+          path: markbind
+          persist-credentials: false
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          path: markbind
+
+      - name: Install Node Modules
+        run: cd $GITHUB_WORKSPACE/markbind && npm ci
+
+      - name: Set BaseURL
+        uses: ./markbind/.github/actions/setBaseUrl
+        id: setBaseUrl
+        with:
+          file: "markbind/docs/site.json"
+          key: "baseUrl"
+          value: ${{ env.PAGES_URL }}/${{ github.sha }}
+
+      - name: Modified Site.json (testing)
+        run: echo "${{ steps.setBaseUrl.outputs.obj }}"
+
+      - name: Build Docs
+        run: cd $GITHUB_WORKSPACE/markbind/docs && node ../index build
+
+      - name: Archive Docs
+        uses: actions/upload-artifact@v1
+        with:
+          name: output
+          path: markbind/docs/_site
+
+      - name: Clone GH-Pages Repo with Access Token
+        run: git clone https://${{ secrets.GH_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+
+      - name: Copy built files
+        run: cp -r markbind/docs/_site gh-pages/${{ github.sha }}
+
+      - name: Create commit
+        run: cd gh-pages && ls && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}"
+
+      - name: Push to GH-Pages
+        run: cd gh-pages && git push
