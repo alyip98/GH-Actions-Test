@@ -33,7 +33,7 @@ jobs:
 
       - name: Extract variables
         id: getvars
-        uses: $GITHUB_WORKSPACE/util/actions/extract-comment
+        uses: ./util/actions/extract-comment
         with:
           event: ${{ github.event }}
 
