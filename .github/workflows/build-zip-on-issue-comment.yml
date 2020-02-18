@@ -21,8 +21,8 @@ jobs:
       - name: Checkout utilities
         uses: actions/checkout@v2
         with:
-          repository: 'alyip98/GH-Actions-Test'
-          path: 'util'
+          repository: alyip98/GH-Actions-Test
+          path: util
 
       - name: Print github event variable
         env:
@@ -36,15 +36,51 @@ jobs:
           event: ${{ toJSON(github.event) }}
 
       - name: Print extracted variables
-        run: echo ${{ steps.getvars.outputs }}
+        run: echo ${{ steps.getvars.outputs.path }}
 
       - name: Checkout selected Markbind version
         uses: actions/checkout@v2
         with:
-          repository: 'MarkBind/markbind'
+          repository: MarkBind/markbind
           ref: ''
-          path: 'markbind'
+          path: markbind
 
+      - run: cd markbind && npm ci
 
+      - name: Download zipped site
+        run: wget -O ./site.zip ${{ steps.getvars.outputs.path }}
 
-      - run: npm ci
+      - name: Unzip file
+        uses: alyip98/unzip
+        with:
+          file: ${{ steps.getvars.outputs.path }}
+          path: ./site
+
+      - name: Set BaseURL
+        uses: ./markbind/.github/actions/setBaseUrl
+        id: setBaseUrl
+        with:
+          file: "markbind/docs/site.json"
+          key: "baseUrl"
+          value: ${{ env.PAGES_URL }}/${{ github.sha }}
+
+      - name: Build site
+        run: cd ./site && node $GITHUB_WORKSPACE/markbind/index build
+
+      - name: Archive Docs
+        uses: actions/upload-artifact@v1
+        with:
+          name: output
+          path: site/_site
+
+#      - name: Clone GH-Pages Repo with Access Token
+#        run: git clone https://${{ secrets.GH_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
+#
+#      - name: Copy built files
+#        run: cp -r markbind/docs/_site gh-pages/${{ github.sha }}
+#
+#      - name: Create commit
+#        run: cd gh-pages && ls && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}"
+#
+#      - name: Push to GH-Pages
+#        run: cd gh-pages && git push
