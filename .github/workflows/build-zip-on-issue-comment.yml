@@ -85,7 +85,7 @@ jobs:
         run: cp -r site/_site gh-pages/${{ github.sha }}
 
       - name: Create commit
-        run: cd gh-pages && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}"
+        run: cd gh-pages && git config user.email "" && git config user.name "GH Actions" && git add . && git commit -m "Update built site for ${{ github.sha }}\n ${{ env.PAGES_URL }}/${{ github.sha }}"
 
       - name: Push to GH-Pages
         run: cd gh-pages && git push
