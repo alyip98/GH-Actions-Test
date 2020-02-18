@@ -1,0 +1,28 @@
+name: Build zip on issue comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print github event variable
+        env:
+          GITHUB_EVENT: ${{ github.event }}
+          GITHUB_EVENT_JSON: ${{ toJSON(github.event) }}
+        run: echo $GITHUB_EVENT \n $GITHUB_EVENT_JSON
+
+      - name: Checkout selected Markbind version
+        uses: actions/checkout@v2
+        with:
+          repository: 'https://github.com/MarkBind/markbind.git'
+          ref: ''
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - run: npm ci
