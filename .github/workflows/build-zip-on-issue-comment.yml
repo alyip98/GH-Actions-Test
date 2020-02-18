@@ -60,7 +60,7 @@ jobs:
           path: ./site
 
       - name: Set BaseURL
-        uses: alyip98/set-json@v0.1-alpha
+        uses: alyip98/set-json@v0.2-alpha
         id: setBaseUrl
         with:
           file: site/site.json
