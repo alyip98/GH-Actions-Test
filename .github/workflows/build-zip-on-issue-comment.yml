@@ -19,10 +19,10 @@ jobs:
           node-version: '12.x'
 
       - name: Checkout utilities
-          uses: actions/checkout@v2
-          with:
-            repository: 'https://github.com/alyip98/GH-Actions-Test'
-            path: 'util'
+        uses: actions/checkout@v2
+        with:
+          repository: 'https://github.com/alyip98/GH-Actions-Test'
+          path: 'util'
 
       - name: Print github event variable
         env:
