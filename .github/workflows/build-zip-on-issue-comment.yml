@@ -81,7 +81,7 @@ jobs:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           issue-number: ${{ github.event.issue.number }}
           body: [Built site](${{ env.PAGES_URL }}/${{ github.sha }})
 
