@@ -13,15 +13,21 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+
+      - name: Checkout utilities
+          uses: actions/checkout@v2
+          with:
+            repository: 'https://github.com/alyip98/GH-Actions-Test'
+            path: 'util'
       - name: Print github event variable
         env:
-          BODY: ${{ toJSON(github).event.comment.body }}
+          BODY: ${{ toJSON(github.event) }}
         run: echo "$BODY"
 
       - name: Checkout selected Markbind version
         uses: actions/checkout@v2
         with:
-          repository: 'https://github.com/MarkBind/markbind.git'
+          repository: 'https://github.com/MarkBind/markbind'
           ref: ''
 
       - uses: actions/setup-node@v1
