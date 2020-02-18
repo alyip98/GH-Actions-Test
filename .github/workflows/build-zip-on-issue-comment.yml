@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test
-        run: echo ${{ github.event.issue.number }}
-        
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -86,7 +83,8 @@ jobs:
         with:
           token: ${{ github.token }}
           issue-number: ${{ github.event.issue.number }}
-          body: [Built site](${{ env.PAGES_URL }}/${{ github.sha }})
+          body: |
+            [Built site](${{ env.PAGES_URL }}/${{ github.sha }})
 
 #      - name: Clone GH-Pages Repo with Access Token
 #        run: git clone https://${{ secrets.PAGES_TOKEN }}@github.com/alyip98/GH-Actions-Test.git gh-pages
