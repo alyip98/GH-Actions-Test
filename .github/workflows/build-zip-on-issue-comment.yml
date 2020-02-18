@@ -51,7 +51,7 @@ jobs:
         run: wget -O ./site.zip ${{ steps.getvars.outputs.path }}
 
       - name: Unzip file
-        uses: alyip98/unzip
+        uses: @alyip98/unzip
         with:
           file: ${{ steps.getvars.outputs.path }}
           path: ./site
