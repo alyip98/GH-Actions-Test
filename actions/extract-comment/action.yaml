@@ -1,0 +1,14 @@
+name: 'Unzip file'
+description: 'Unzips a .zip file'
+inputs:
+  events:
+    description: 'event object'
+    required: true
+outputs:
+  path:
+    description: 'zip path'
+  version:
+    description: 'markbind version'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
