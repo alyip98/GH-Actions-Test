@@ -51,7 +51,7 @@ jobs:
         run: wget -O ./site.zip ${{ steps.getvars.outputs.path }}
 
       - name: Unzip file
-        uses: @alyip98/unzip
+        uses: alyip98/unzip@v0.1-alpha
         with:
           file: ${{ steps.getvars.outputs.path }}
           path: ./site
@@ -60,8 +60,8 @@ jobs:
         uses: ./markbind/.github/actions/setBaseUrl
         id: setBaseUrl
         with:
-          file: "markbind/docs/site.json"
-          key: "baseUrl"
+          file: markbind/docs/site.json
+          key: baseUrl
           value: ${{ env.PAGES_URL }}/${{ github.sha }}
 
       - name: Build site
