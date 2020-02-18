@@ -57,9 +57,7 @@ const core = __webpack_require__(881);
 
 try {
   const event = core.getInput('event', {required: true});
-  const path = core.getInput('path', {required: true}) || '';
-  new AdmZip(file).extractAllTo(path, true);
-  core.setOutput('path', path);
+  core.setOutput('path', 'thisisthepathoutoput');
 } catch (error) {
   core.setFailed(error.message);
 }
