@@ -36,7 +36,7 @@ jobs:
           event: ${{ toJSON(github.event) }}
 
       - name: Print extracted variables
-        run: echo ${{ steps.getvars.outputs.path }}
+        run: echo "${{ steps.getvars.outputs.path }}" "${{ steps.getvars.outputs.version }}"
 
       - name: Checkout selected Markbind version
         uses: actions/checkout@v2
