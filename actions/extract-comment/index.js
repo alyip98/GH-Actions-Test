@@ -10,7 +10,7 @@ try {
   console.log(matches);
 
   const path = matches[1];
-  const version = matches[2] || '';
+  const version = matches[2].replace('tags/', '') || '';
 
   core.setOutput('path', path);
   core.setOutput('version', version);
