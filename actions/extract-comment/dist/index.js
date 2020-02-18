@@ -56,7 +56,7 @@ module.exports = require("os");
 const core = __webpack_require__(881);
 
 try {
-  const obj = core.getInput('obj', {required: true});
+  const event = core.getInput('event', {required: true});
   const path = core.getInput('path', {required: true}) || '';
   new AdmZip(file).extractAllTo(path, true);
   core.setOutput('path', path);
