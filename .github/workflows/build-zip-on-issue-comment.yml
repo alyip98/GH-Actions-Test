@@ -21,7 +21,7 @@ jobs:
       - name: Checkout utilities
         uses: actions/checkout@v2
         with:
-          repository: 'https://github.com/alyip98/GH-Actions-Test'
+          repository: 'alyip98/GH-Actions-Test'
           path: 'util'
 
       - name: Print github event variable
@@ -41,7 +41,7 @@ jobs:
       - name: Checkout selected Markbind version
         uses: actions/checkout@v2
         with:
-          repository: 'https://github.com/MarkBind/markbind'
+          repository: 'MarkBind/markbind'
           ref: ''
           path: 'markbind'
 
