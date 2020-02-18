@@ -29,9 +29,11 @@ jobs:
           EVENT: ${{ toJSON(github.event) }}
         run: echo "$EVENT"
 
+      - run: ls -R
+
       - name: Extract variables
         id: getvars
-        uses: ./util/actions/extract-comment
+        uses: $GITHUB_WORKSPACE/util/actions/extract-comment
         with:
           event: ${{ github.event }}
 
