@@ -59,6 +59,8 @@ jobs:
           file: ./site.zip
           path: ./site
 
+      - run: ls -R ./site
+
       - name: Set BaseURL
         uses: alyip98/set-json@v0.2-alpha
         id: setBaseUrl
