@@ -59,18 +59,8 @@ jobs:
           file: ./site.zip
           path: ./site
 
-      - run: ls -R ./site
-
-      - name: Set BaseURL
-        uses: alyip98/set-json@v0.2-alpha
-        id: setBaseUrl
-        with:
-          file: site/site.json
-          key: baseUrl
-          value: ${{ env.PAGES_URL }}/${{ github.sha }}
-
       - name: Build site
-        run: cd ./site && node $GITHUB_WORKSPACE/markbind/index build
+        run: cd ./site && node markbind/index build --baseUrl ${{ env.BASE_URL }}
 
       - name: Archive Docs
         uses: actions/upload-artifact@v1
