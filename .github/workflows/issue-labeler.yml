@@ -21,7 +21,7 @@ jobs:
       uses: Naturalclar/issue-action@v1.0.0
       with:
         # Github token
-        github-token: GITHUB_TOKEN
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         # keywords to look for in the issue
         keywords: '["test"]'
         # labels to be set when keyword is found
