@@ -23,8 +23,8 @@ jobs:
           # Github token
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # keywords to look for in the issue
-          keywords: '["test"]'
+          keywords: '["bug"]'
           # assignees to be assigned when keyword is found
           assignees: '["alyip98"]'
           # labels to be set when keyword is found
-          labels: '["bug-report"]'
+          labels: '["to-investigate"]'
